@@ -40,7 +40,7 @@ namespace Start.Demos.InterceptorDemo
 
         private string GetArguments(IInvocation invocation)
         {
-            return string.Join(", ", invocation.Arguments.Select(x => $"\"{x}\""));
+            return string.Join(", ", invocation.Arguments.Select(x => $"<{x.GetType().FullName}> \"{x}\""));
         }
     }
 }
