@@ -51,7 +51,7 @@
 	In the same system, the customer now wants to add TD bank transactions. This is getting out of hand! 
 	To add the cherry on the sundae, since banks are old school, the service needs to call the bank for a code before doing anything!
 
-	- Create a new component (deriving from BaseComponent), call it TDBankConnection, make it implement a new service called IDatabaseConnection
+	- Create a new component (deriving from BaseComponent), call it TDBankConnection, make it implement the service called IDatabaseConnection
 	- Create a public method (only in the impl) called "CallBank" where you will simply log "Calling bank"
 
 	This would be a great opportunity to try messing around with https://github.com/castleproject/Windsor/blob/master/docs/startable-facility.md
