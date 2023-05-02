@@ -2,5 +2,7 @@
 
 public interface IPaypalFactory
 {
+    IDatabaseConfiguration GetConfiguration();
+
     string ResolveConnectionName { get; }
 }

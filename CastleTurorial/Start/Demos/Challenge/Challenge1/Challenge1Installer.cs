@@ -3,6 +3,7 @@ using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Start.Demos.Challenge.Application;
+using Start.Demos.Challenge.Application.Paypal;
 
 namespace Start.Demos.Challenge.Challenge1
 {
@@ -16,13 +17,19 @@ namespace Start.Demos.Challenge.Challenge1
             
             container.Register(
                 Component.For<ICanBeDemoed>().ImplementedBy<Challenge1Demo>(),
+
+                Component.For<IPaypalFactory>().ImplementedBy<PaypalFactory>(),
+
                 Component.For<IDatabaseConfiguration>()
                     .ImplementedBy<DatabaseConfiguration>()
                     .DependsOn(Dependency.OnValue<string>("Mastercard"))
                     .Named("Mastercard"),
                 Component.For<IDatabaseConfiguration>()
                     .Instance(visaConfiguration)
-                    .Named("visa")
+                    .Named("Visa"),
+                Component.For<IDatabaseConfiguration>()
+                    .UsingFactoryMethod(() => container.Resolve<IPaypalFactory>().GetConfiguration())
+                    .Named("Paypal")
             );
         }
     }
