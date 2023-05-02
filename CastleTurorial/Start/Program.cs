@@ -1,6 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Start;
+using Start.Demos.Challenge.Challenge1;
 using Start.Demos.InterceptorDemo;
 using Start.Demos.TransientComponentDemo;
 using Start.Demos.TypedFactoryDemo;
@@ -10,7 +11,7 @@ var container = new WindsorContainer();
 
 var installers = new[]
 {
-    new InterceptorDemoInstaller()
+    new Challenge1Installer()
 };
 
 const string space = "\n\n\n\n";
