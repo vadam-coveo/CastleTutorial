@@ -1,16 +1,14 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Start;
-using Start.Demos.InterceptorDemo;
-using Start.Demos.TransientComponentDemo;
-using Start.Demos.TypedFactoryDemo;
+using Start.Demos.ScopeDemo.CustomScope;
 using Start.Loggers;
 
 var container = new WindsorContainer();
 
 var installers = new[]
 {
-    new InterceptorDemoInstaller()
+    new CustomScopeDemoInstaller()
 };
 
 const string space = "\n\n\n\n";
@@ -23,7 +21,7 @@ ConsoleLogger.WriteLine($"-----------------After installing-------------{space}"
 var start = DateTime.Now;
 ConsoleLogger.WriteLine("-----------------Before resolving root-------------");
 var example = container.Resolve<ICanBeDemoed>();
-ConsoleLogger.WriteLine($"-----------------After resolving root : {DateTime.Now- start}-------------{space}");
+ConsoleLogger.WriteLine($"-----------------After resolving root : {DateTime.Now - start}-------------{space}");
 
 
 ConsoleLogger.WriteLine("-----------------Before calling demo-------------");

@@ -20,7 +20,16 @@ namespace Start.Demos.InterceptorDemo
             }
             catch (Exception ex)
             {
-                Logger.LogLogic("Now we're done retrying!");
+                Logger.LogLogic($"Now we're done retrying!, exception was {ex.Message}");
+            }
+
+            try
+            {
+                Myservice.MyWonderfulRestApiCall("JB");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogLogic($"Now we're done retrying!, exception was {ex.Message}");
             }
         }
     }

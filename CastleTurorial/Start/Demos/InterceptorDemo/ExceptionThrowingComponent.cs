@@ -12,5 +12,10 @@ namespace Start.Demos.InterceptorDemo
         {
             throw new Exception("I have thrown");
         }
+
+        public void MyWonderfulRestApiCall(string userId)
+        {
+            throw new UnauthorizedAccessException($"patate {Guid.NewGuid()}");
+        }
     }
 }
