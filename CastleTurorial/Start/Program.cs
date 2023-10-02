@@ -1,14 +1,14 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Start;
-using Start.Demos.ScopeDemo.CustomScope;
+using Start.Demos.ObserverDemo;
 using Start.Loggers;
 
 var container = new WindsorContainer();
 
 var installers = new[]
 {
-    new CustomScopeDemoInstaller()
+    new ObserverDemoInstaller()
 };
 
 const string space = "\n\n\n\n";
