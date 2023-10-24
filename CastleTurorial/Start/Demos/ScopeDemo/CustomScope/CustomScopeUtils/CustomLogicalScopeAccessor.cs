@@ -13,12 +13,12 @@ namespace Start.Demos.ScopeDemo.CustomScope.CustomScopeUtils
 
         public ILifetimeScope GetScope(CreationContext context)
         {
-            var scope = CustomLogicalScope<T>.ObtainCurrentScope();
+            var scope = CustomLogicalScope<T>.ObtainCurrentScope();  
             if (scope == null)
             {
-                throw new InvalidOperationException($"Scope was not available. Did you forget to instantiate a new CustomLogicalScopeAccessor<${typeof(T)}> upstream?");
+                throw new InvalidOperationException($"Scope was not available. Did you forget to instantiate a new CustomLogicalScopeAccessor<${typeof(T)}> upstream for component {context.Handler.ComponentModel.ComponentName}?");
             }
             return scope;
         }
-    }
+    } 
 }

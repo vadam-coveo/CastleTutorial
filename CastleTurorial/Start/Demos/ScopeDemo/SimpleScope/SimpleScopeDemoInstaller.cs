@@ -17,7 +17,7 @@ namespace Start.Demos.ScopeDemo.SimpleScope
                 Component.For<ICanBeDemoed>().ImplementedBy<SimpleScopeDemo>(),
                 Component.For<ScopeProvider>().DependsOn(Dependency.OnValue<IWindsorContainer>(container)),
 
-                Component.For<IComponentFactory>().AsFactory(),
+                Component.For<IAbstractFactory>().AsFactory(),
 
                 Component.For<IStartingAddress>().ImplementedBy<StartingAddress>().LifestyleScoped(),
                 Component.For<IComponentPerStartingAddress>().ImplementedBy<ComponentPerStartingAddress>().LifestyleScoped()

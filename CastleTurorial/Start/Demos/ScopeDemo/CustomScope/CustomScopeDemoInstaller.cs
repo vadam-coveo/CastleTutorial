@@ -17,7 +17,7 @@ namespace Start.Demos.ScopeDemo.CustomScope
 
                 Component.For<ICanBeDemoed>().ImplementedBy<CustomScopeDemo>(),
 
-                Component.For<IComponentFactory>().AsFactory(),
+                Component.For<IAbstractFactory>().AsFactory(),
 
                 Component.For<IStartingAddress>().ImplementedBy<StartingAddress>()
                     .LifestyleScoped<CustomLogicalScopeAccessor<StartingAddress>>(),

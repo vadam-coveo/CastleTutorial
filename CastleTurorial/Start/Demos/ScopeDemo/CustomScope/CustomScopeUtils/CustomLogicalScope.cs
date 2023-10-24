@@ -44,7 +44,6 @@ public class CustomLogicalScope<T> : ILifetimeScope where T : class
     }
 
     [SecuritySafeCritical]
-    [Obsolete]
     public void Dispose()
     {
         using (var token = @lock.ForReadingUpgradeable())
@@ -70,7 +69,6 @@ public class CustomLogicalScope<T> : ILifetimeScope where T : class
         appDomainLocalInstanceCache.TryRemove(contextId, out _);
     }
 
-    [Obsolete]
     public Burden GetCachedInstance(ComponentModel model, ScopedInstanceActivationCallback createInstance)
     {
         using (var token = @lock.ForReadingUpgradeable())

@@ -6,14 +6,14 @@ namespace Start.Demos.ScopeDemo.SimpleScope
 {
     public class SimpleScopeDemo : BaseComponent, ICanBeDemoed
     {
-        public IComponentFactory ComponentFactory { get; }
+        public IAbstractFactory AbstractFactory { get; }
         public ScopeProvider ScopeProvider { get; }
 
         private IComponentPerStartingAddress component1;
 
-        public SimpleScopeDemo(IComponentFactory componentFactory, ILogger logger, ScopeProvider scopeProvider) : base(logger)
+        public SimpleScopeDemo(IAbstractFactory abstractFactory, ILogger logger, ScopeProvider scopeProvider) : base(logger)
         {
-            ComponentFactory = componentFactory;
+            AbstractFactory = abstractFactory;
             ScopeProvider = scopeProvider;
         }
 
@@ -21,9 +21,9 @@ namespace Start.Demos.ScopeDemo.SimpleScope
         {
             var scope1 = ScopeProvider.BeginScope();
 
-            var startingAddress1 = ComponentFactory.CreateStartingAddress("patate");
+            var startingAddress1 = AbstractFactory.CreateStartingAddress("patate");
             Logger.LogLogic($"Created scope {startingAddress1.Address}");
-            component1 = ComponentFactory.ResolveComponentForStartingAddress();
+            component1 = AbstractFactory.ResolveComponentForStartingAddress();
 
             Logger.LogLogic($"Created {component1}");
             TryAgain();
@@ -31,9 +31,9 @@ namespace Start.Demos.ScopeDemo.SimpleScope
 
             var scope2 = ScopeProvider.BeginScope();
 
-            var startingAddress = ComponentFactory.CreateStartingAddress("otherpatate");
+            var startingAddress = AbstractFactory.CreateStartingAddress("otherpatate");
             Logger.LogLogic($"Created scope {startingAddress.Address}");
-            var component = ComponentFactory.ResolveComponentForStartingAddress();
+            var component = AbstractFactory.ResolveComponentForStartingAddress();
             Logger.LogLogic($"Created {component}");
             scope2.Dispose();
 
@@ -45,7 +45,7 @@ namespace Start.Demos.ScopeDemo.SimpleScope
 
         private void TryAgain()
         {
-            var component11 = ComponentFactory.ResolveComponentForStartingAddress();
+            var component11 = AbstractFactory.ResolveComponentForStartingAddress();
             Logger.LogLogic($"Tryed resolving component1 again :  {component11} ");
 
             if (component1.ComponentId != component11.ComponentId)

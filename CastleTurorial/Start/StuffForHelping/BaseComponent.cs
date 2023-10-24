@@ -6,6 +6,7 @@ namespace Start.StuffForHelping
     public class BaseComponent
     {
         public Guid Guid = Guid.NewGuid();
+        public readonly HashSet<string> DiscoveredAddresses = new HashSet<string>();
         protected ILogger Logger { get; }
 
         public BaseComponent(ILogger logger)

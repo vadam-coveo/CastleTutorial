@@ -3,6 +3,7 @@
     public class ConsoleLogger : ILogger
     {
         public Guid Guid = Guid.NewGuid();
+        private static object _lock = new object();
 
         public ConsoleLogger()
         {
@@ -36,13 +37,17 @@
 
         public static void WriteLine(string message, ConsoleColor color = ConsoleColor.White, int tabIndentation = 0)
         {
-            var indentation = tabIndentation > 1? string.Concat(Enumerable.Repeat("   ", tabIndentation)) : "";
-            Console.ForegroundColor = color;
+            lock (_lock)
+            {
+                var indentation = tabIndentation > 1 ? string.Concat(Enumerable.Repeat("   ", tabIndentation)) : "";
+                Console.ForegroundColor = color;
 
-            Console.WriteLine($"{indentation}{message}");
-            Console.WriteLine($"\r");
+                Console.WriteLine($"{indentation}{message}");
+                Console.WriteLine($"\r");
 
-            Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+                
         }
 
         public override string ToString()

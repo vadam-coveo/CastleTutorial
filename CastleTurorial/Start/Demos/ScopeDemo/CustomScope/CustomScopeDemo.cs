@@ -8,12 +8,12 @@ namespace Start.Demos.ScopeDemo.CustomScope
 {
     internal class CustomScopeDemo : BaseComponent, ICanBeDemoed
     {
-        public IComponentFactory ComponentFactory { get; }
+        public IAbstractFactory AbstractFactory { get; }
         private IComponentPerStartingAddress component1;
         private ScopeProvider ScopeProvider;
-        public CustomScopeDemo(ILogger logger, IComponentFactory componentFactory, ScopeProvider scopeProvider) : base(logger)
+        public CustomScopeDemo(ILogger logger, IAbstractFactory abstractFactory, ScopeProvider scopeProvider) : base(logger)
         {
-            ComponentFactory = componentFactory;
+            AbstractFactory = abstractFactory;
             ScopeProvider = scopeProvider;
         }
 
@@ -23,8 +23,8 @@ namespace Start.Demos.ScopeDemo.CustomScope
             Logger.LogLogic($"++++++++++  Creating new starting address scope1 patate");
             var scope1 = new CustomLogicalScope<StartingAddress>();
 
-            ComponentFactory.CreateStartingAddress("patate");
-            component1 = ComponentFactory.ResolveComponentForStartingAddress();
+            AbstractFactory.CreateStartingAddress("patate");
+            component1 = AbstractFactory.ResolveComponentForStartingAddress();
             Logger.LogLessRelevantStuff($"Created new component per starting address : {component1}");
 
             TryAgain();
@@ -33,10 +33,10 @@ namespace Start.Demos.ScopeDemo.CustomScope
             Logger.LogLogic($"++++++++++  Creating new starting address scope2 (nested within scope1) otherpatate");
             var scope2 = new CustomLogicalScope<StartingAddress>();
 
-            ComponentFactory.CreateStartingAddress("otherpatate");
-            var component2 = ComponentFactory.ResolveComponentForStartingAddress();
+            AbstractFactory.CreateStartingAddress("otherpatate");
+            var component2 = AbstractFactory.ResolveComponentForStartingAddress();
             Logger.LogLessRelevantStuff($"Created new component per starting address : {component2}");
-            var component22 = ComponentFactory.ResolveComponentForStartingAddress();
+            var component22 = AbstractFactory.ResolveComponentForStartingAddress();
 
             Logger.LogLogic($"Component 2 resolved twice within context 2 are equal = {component22.ComponentId == component2.ComponentId}");
 
@@ -73,7 +73,7 @@ namespace Start.Demos.ScopeDemo.CustomScope
 
         private void TryAgain(bool isInTask = false)
         {
-            var component11 = ComponentFactory.ResolveComponentForStartingAddress();
+            var component11 = AbstractFactory.ResolveComponentForStartingAddress();
 
             if (!isInTask)
             {
